@@ -1,4 +1,4 @@
-Ext.Define('jpdev832.utils.FaceDetection',{
+Ext.define('FaceTest.utils.FaceDetection',{
     extend: 'Ext.Base',
     
     config: {
@@ -10,8 +10,8 @@ Ext.Define('jpdev832.utils.FaceDetection',{
         var canvas = document.createElement("canvas");
         var ctx = canvas.getContext("2d");
 
-        canvas.width  = image.getWidth();
-        canvas.height = image.getHeight();
+        canvas.width  = image.width;
+        canvas.height = image.height;
 
         ctx.drawImage(image, 0, 0);
         var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -24,17 +24,19 @@ Ext.Define('jpdev832.utils.FaceDetection',{
         return canvas;
     },
 
-    detect: function (image) {		
+    detect: function (imageComponent) {	
+        debugger;
+        var image = imageComponent.getContentEl().dom;
         try {
             var coords = ccv.detect_objects(grayscale(image), cascade, 5, 1);
         } catch(e) {
             return [];
         }
 
-        var positionX 	= image.left - image.getParent().left;
-        var positionY 	= image.top - image.getParent().top;	
-        var offsetX 	= image.left;
-        var offsetY 	= image.top;
+        var positionX 	= imageComponent.left;
+        var positionY 	= imageComponent.top;	
+        var offsetX 	= imageComponent.left - imageComponent.getParent().left;
+        var offsetY 	= imageComponent.top - imageComponent.getParent().top;
         var newCoords 	= [];
 
         for (var i = 0; i < coords.length; i++) {
