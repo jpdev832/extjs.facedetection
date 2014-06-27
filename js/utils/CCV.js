@@ -10,16 +10,11 @@ Redistribution and use in source and binary forms, with or without modification,
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-Ext.Define('jpdev832.utils.CCV',{
+Ext.define('FaceTest.utils.CCV',{
     extend: 'Ext.Base',
-    singleton: true,
-    
-    requires: [
-        'jpdev832.utils.FaceCascade'   
-    ],
     
     config: {
-        cascade: jpdev832.utils.faceCascade.getCascade();
+        cascade: null
     },
     
     array_group: function (seq, gfunc) {
@@ -240,7 +235,7 @@ Ext.Define('jpdev832.utils.CCV',{
 		if (!(min_neighbors > 0))
 			return seq;
 		else {
-			var result = ccv.array_group(seq, function (r1, r2) {
+			var result = this.array_group(seq, function (r1, r2) {
 				var distance = Math.floor(r1.width * 0.25 + 0.5);
 
 				return r2.x <= r1.x + distance &&
@@ -278,7 +273,7 @@ Ext.Define('jpdev832.utils.CCV',{
 				comps[idx].height += r1.height;
 				comps[idx].confidence = Math.max(comps[idx].confidence, r1.confidence);
 			}
-
+            
 			var seq2 = [];
 			// calculate average bounding box
 			for(i = 0; i < ncomp; i++)

@@ -1,6 +1,11 @@
 Ext.define('FaceTest.utils.FaceDetection',{
     extend: 'Ext.Base',
     
+    requires: [
+        'FaceTest.utils.CCV',
+        'FaceTest.utils.FaceCascade'
+    ],
+    
     config: {
         confidence: null
     },
@@ -24,19 +29,21 @@ Ext.define('FaceTest.utils.FaceDetection',{
         return canvas;
     },
 
-    detect: function (imageComponent) {	
-        debugger;
-        var image = imageComponent.getContentEl().dom;
+    detect: function (imageComponent) {
+        var image = imageComponent.imageObject;
+        var cascade = FaceTest.utils.FaceCascade.cascade;
+        var ccv = Ext.create('FaceTest.utils.CCV', { cascade: cascade } );
         try {
-            var coords = ccv.detect_objects(grayscale(image), cascade, 5, 1);
+            var coords = ccv.detect_objects(this.grayscale(image), cascade, 5, 1);
         } catch(e) {
             return [];
         }
 
-        var positionX 	= imageComponent.left;
-        var positionY 	= imageComponent.top;	
-        var offsetX 	= imageComponent.left - imageComponent.getParent().left;
-        var offsetY 	= imageComponent.top - imageComponent.getParent().top;
+        //need to fix positions from component
+        var positionX 	= imageComponent.getLeft();
+        var positionY 	= imageComponent.getTop();	
+        var offsetX 	= imageComponent.getLeft() - imageComponent.getParent().getLeft();
+        var offsetY 	= imageComponent.getTop() - imageComponent.getParent().getTop();
         var newCoords 	= [];
 
         for (var i = 0; i < coords.length; i++) {
