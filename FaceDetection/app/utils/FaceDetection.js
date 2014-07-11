@@ -1,3 +1,8 @@
+/********************************
+ *
+ * Face detection class
+ *
+ ********************************/
 Ext.define('FaceDetection.utils.FaceDetection',{
     extend: 'Ext.Base',
     
@@ -10,7 +15,12 @@ Ext.define('FaceDetection.utils.FaceDetection',{
         confidence: null
     },
     
-    // Grayscale function by Liu Liu
+    /**
+     * Convert <image> source to grayscale using html canvas
+     * 
+     * @param image <image> html image element
+     * @return Canvas <Canvas> html element
+     */
 	grayscale: function (image) {
         var canvas = document.createElement("canvas");
         var ctx = canvas.getContext("2d");
@@ -29,6 +39,12 @@ Ext.define('FaceDetection.utils.FaceDetection',{
         return canvas;
     },
 
+    /**
+     * Detect faces from Ext.Image component
+     *
+     * @param imageComponent Ext.Image component
+     * @return Array array containing face information
+     */
     detect: function (imageComponent) {
         var image = imageComponent.imageObject;
         image.crossOrigin = 'Anonymous';

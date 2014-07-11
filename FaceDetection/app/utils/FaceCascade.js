@@ -1,3 +1,8 @@
+/********************************
+ *
+ * Haar Cascade for detecting faces
+ *
+ ********************************/
 Ext.define('FaceDetection.utils.FaceCascade',{
     extend: 'Ext.Base',
     singleton: true,

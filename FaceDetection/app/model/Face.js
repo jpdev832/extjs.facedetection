@@ -3,8 +3,8 @@ Ext.define('FaceDetection.model.Face', {
     
     config: {
         fields: [
-            { name: 'faceSrc', type: 'auto' }
-
+            { name: 'faceSrc', type: 'auto' },
+            { name: 'confidence', type: 'auto' }
         ]
     }
 });

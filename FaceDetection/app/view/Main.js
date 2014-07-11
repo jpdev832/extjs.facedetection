@@ -29,19 +29,20 @@ Ext.define('FaceDetection.view.Main', {
                 items: [
                     {
                         xtype: 'image',
-                        src: '../../images/test.jpg',
+                        src: '../../images/test2.jpg',
                         name: 'imgDetect',
                         width: 400,
                         height: 400
                     },
                     {
                         xtype: 'dataview',
-                        width: 400,
+                        width: 600,
+                        height: 500,
                         margin: 20,
                         scrollable: {
                             direction: 'vertical'   
                         },
-                        itemTpl: "<img src='{faceSrc}' />",
+                        itemTpl: "<div><img src='{faceSrc}' /><p>Confidence: {confidence}</p><hr></div>",
                         store: 'Face'
                     }
                 ]

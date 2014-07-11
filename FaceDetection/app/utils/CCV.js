@@ -17,6 +17,9 @@ Ext.define('FaceDetection.utils.CCV',{
         cascade: null
     },
     
+    /**
+     * Array group
+     */
     array_group: function (seq, gfunc) {
 		var i, j;
 		var node = new Array(seq.length);
@@ -92,6 +95,9 @@ Ext.define('FaceDetection.utils.CCV',{
 		return {"index" : idx, "cat" : class_idx};
 	},
 
+    /**
+     * Detect objects based on cascade
+     */
 	detect_objects: function (canvas, cascade, interval, min_neighbors) {
 		var scale = Math.pow(2, 1 / (interval + 1));
 		var next = interval + 1;

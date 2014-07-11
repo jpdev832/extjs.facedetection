@@ -37,7 +37,7 @@ Ext.define('FaceDetection.controller.Main', {
         
         for( var i=0; i<coords.length; i++ )
         {
-            faceStore.add( { faceSrc: coords[i].subImgUrl } );   
+            faceStore.add( { faceSrc: coords[i].subImgUrl, confidence: coords[i].confidence } );   
         }
         faceStore.sync();
     }
